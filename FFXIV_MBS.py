@@ -2,10 +2,10 @@ import requests
 import json
 
 
-with open ("market_items.json", "r") as market_items: #open .json file with marketable item ID numbers
+with open ("market_items.json", encoding="utf8") as market_items: #open .json file with marketable item ID numbers
 	market_items = json.load(market_items)
 
-with open ('items.json') as all_items: #open .json file with all items names & ID numbers
+with open ('items.json', encoding="utf8") as all_items: #open .json file with all items names & ID numbers
 	all_items = json.load(all_items)
 
 for x in range(1, len(market_items), 1): #for all items in market_items.json
