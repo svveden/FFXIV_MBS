@@ -10,6 +10,8 @@ More world price comparisons, sorting, higher sold items appearing first, etc.
 
 This bot is for comparing items against Ultros' (my home server) marketboard.
 
+Market info provided by Universalis API and is almost always not up date, so numbers will likely be off by small amounts or deals sold.
+
 As of right now, this bot has the following output:
 ```
 Item Name
