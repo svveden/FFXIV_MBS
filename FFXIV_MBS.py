@@ -27,18 +27,27 @@ for x in range(1, len(market_items)):
 		api_url_ultros= "https://universalis.app/api/v2/Ultros/" + current_item_IDs + "?listings=2" #call api for current item(s)
 		api_url_famfrit= "https://universalis.app/api/v2/Famfrit/" + current_item_IDs + "?listings=2"
 		api_url_exodus= "https://universalis.app/api/v2/Exodus/" + current_item_IDs + "?listings=2"
+		api_url_behemoth= "https://universalis.app/api/v2/Behemoth/" + current_item_IDs + "?listings=2"
+		api_url_excalibur= "https://universalis.app/api/v2/Excalibur/" + current_item_IDs + "?listings=2"
+		api_url_lamia= "https://universalis.app/api/v2/Lamia/" + current_item_IDs + "?listings=2"
 		############################################
-		world_prices_array = [9999999,9999999,9999999]
-		world_quantities_array = [0,0,0]
+		world_prices_array = [9999999,9999999,9999999,9999999,9999999,9999999]
+		world_quantities_array = [0,0,0,0,0,0]
 		sale_velocity = 0.0
 
 		######.JSON SETUPS FOR EACH WORD ON PRIMAL######
 		ultros_response = requests.get(api_url_ultros) #set GET to response
 		famfrit_response = requests.get(api_url_famfrit)
 		exodus_response = requests.get(api_url_exodus)
+		behemoth_response = requests.get(api_url_behemoth)
+		excalibur_response = requests.get(api_url_excalibur)
+		lamia_response = requests.get(api_url_lamia)
 		ultros_prices = ultros_response.json() 
 		famfrit_prices= famfrit_response.json()
 		exodus_prices = exodus_response.json()
+		behemoth_prices = behemoth_response.json()
+		excalibur_prices = excalibur_response.json()
+		lamia_prices = lamia_response.json()
 		############################################
 
 		current_item_IDs_list = current_item_IDs.split(",") #splitting up the long string of item IDs for easier data manipulation
@@ -54,20 +63,30 @@ for x in range(1, len(market_items)):
 			if len(exodus_prices['items'][str(current_item_IDs_list[z])]['listings']) > 0:
 				world_prices_array[2] = exodus_prices['items'][str(current_item_IDs_list[z])]['listings'][0]['pricePerUnit']
 				world_quantities_array[2] = exodus_prices['items'][str(current_item_IDs_list[z])]['listings'][0]['quantity']
+			if len(behemoth_prices['items'][str(current_item_IDs_list[z])]['listings']) > 0:
+				world_prices_array[3] = behemoth_prices['items'][str(current_item_IDs_list[z])]['listings'][0]['pricePerUnit']
+				world_quantities_array[3] = behemoth_prices['items'][str(current_item_IDs_list[z])]['listings'][0]['quantity']
+			if len(excalibur_prices['items'][str(current_item_IDs_list[z])]['listings']) > 0:
+				world_prices_array[4] = excalibur_prices['items'][str(current_item_IDs_list[z])]['listings'][0]['pricePerUnit']
+				world_quantities_array[4] = excalibur_prices['items'][str(current_item_IDs_list[z])]['listings'][0]['quantity']
+			if len(lamia_prices['items'][str(current_item_IDs_list[z])]['listings']) > 0:
+				world_prices_array[5] = lamia_prices['items'][str(current_item_IDs_list[z])]['listings'][0]['pricePerUnit']
+				world_quantities_array[5] = lamia_prices['items'][str(current_item_IDs_list[z])]['listings'][0]['quantity']
 
 			if min(world_prices_array) < world_prices_array[0]: #if the minimum is less than ultros, continue
 				percentage = world_prices_array[0] - min(world_prices_array)
 				percentage = percentage / world_prices_array[0] * 100 #calculate percentage difference
-				#print(percentage)
 				if abs(percentage) > 20 and float(sale_velocity) > 2: #if difference is greater than 20%, print out info to user
 					print(all_items[str(current_item_IDs_list[z])]["en"]) #name
 					print("Ultros: ", world_prices_array[0], "Gil", "Quanitity:", world_quantities_array[0])
 					print("Famfrit:", world_prices_array[1], "Gil", "Quanitity:", world_quantities_array[1], "Potential Profit:", "{:,}".format(int((world_quantities_array[1] * world_prices_array[0])) - (world_prices_array[1] * world_quantities_array[1])))
 					print("Exodus: ", world_prices_array[2], "Gil", "Quanitity:", world_quantities_array[2], "Potential Profit:", "{:,}".format(int((world_quantities_array[2] * world_prices_array[0])) - (world_prices_array[2] * world_quantities_array[2])))
+					print("Behemoth: ", world_prices_array[3], "Gil", "Quanitity:", world_quantities_array[3], "Potential Profit:", "{:,}".format(int((world_quantities_array[3] * world_prices_array[0])) - (world_prices_array[3] * world_quantities_array[3])))
+					print("Excalibur: ", world_prices_array[4], "Gil", "Quanitity:", world_quantities_array[4], "Potential Profit:", "{:,}".format(int((world_quantities_array[4] * world_prices_array[0])) - (world_prices_array[4] * world_quantities_array[4])))
+					print("Lamia: ", world_prices_array[5], "Gil", "Quanitity:", world_quantities_array[5], "Potential Profit:", "{:,}".format(int((world_quantities_array[5] * world_prices_array[0])) - (world_prices_array[5] * world_quantities_array[5])))
 					print("Current Sale Velocity: ", sale_velocity)
 					print("%",abs(percentage)," difference in price between minimum and Ultros")
 					print(" ") #quantity * gil == net gain from purchase
 		current_item_IDs = "" #empty ID string for next 99 entries
 
-print(largest_profit)
 print("FINISHED!")
