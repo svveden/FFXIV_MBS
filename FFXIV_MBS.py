@@ -61,13 +61,13 @@ for x in range(1, len(market_items)):
 				#print(percentage)
 				if abs(percentage) > 20 and float(sale_velocity) > 2: #if difference is greater than 20%, print out info to user
 					print(all_items[str(current_item_IDs_list[z])]["en"]) #name
-					print("Ultros: ", world_prices_array[0], "Gil", "Quantity:", world_quantities_array[0])
-					print("Famfrit:", world_prices_array[1], "Gil", "Quantity:", world_quantities_array[1])
-					print("Exodus: ", world_prices_array[2], "Gil", "Quantity:", world_quantities_array[2])
+					print("Ultros: ", world_prices_array[0], "Gil", "Quanitity:", world_quantities_array[0])
+					print("Famfrit:", world_prices_array[1], "Gil", "Quanitity:", world_quantities_array[1], "Potential Profit:", "{:,}".format(int((world_quantities_array[1] * world_prices_array[0])) - (world_prices_array[1] * world_quantities_array[1])))
+					print("Exodus: ", world_prices_array[2], "Gil", "Quanitity:", world_quantities_array[2], "Potential Profit:", "{:,}".format(int((world_quantities_array[2] * world_prices_array[0])) - (world_prices_array[2] * world_quantities_array[2])))
 					print("Current Sale Velocity: ", sale_velocity)
 					print("%",abs(percentage)," difference in price between minimum and Ultros")
 					print(" ") #quantity * gil == net gain from purchase
 		current_item_IDs = "" #empty ID string for next 99 entries
 
-
+print(largest_profit)
 print("FINISHED!")
