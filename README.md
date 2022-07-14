@@ -13,9 +13,12 @@ This bot is for comparing items against Ultros' (my home server) marketboard.
 As of right now, this bot has the following output:
 ```
 Item Name
-Ultros:  # Gil Quantity: #
-Famfrit: # Gil Quantity: #
-Exodus:  # Gil Quantity: #
+Ultros:  # Gil Quantity: # 
+Famfrit: # Gil Quantity: # Potential Profit: #
+Exodus:  # Gil Quantity: # Potential Profit: #
+Behemoth: # Gil Quanitity: # Potential Profit: #
+Excalibur: # Gil Quanitity: # Potential Profit: #
+Lamia: # Gil Quantity: # Potential Profit: #
 Current Sale Velocity:  #
 % #  difference in price between minimum and Ultros
 ```
